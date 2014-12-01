@@ -36,16 +36,16 @@ public class Main extends JFrame {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
 					switch (e.getKeyCode()) {
 					case KeyEvent.VK_UP:
-						GameView.getInstance().getSnake().setDirection(Direction.UP);
+						GameView.getInstance().getSnake().setNextDirection(Direction.UP);
 						break;
 					case KeyEvent.VK_RIGHT:
-						GameView.getInstance().getSnake().setDirection(Direction.RIGHT);
+						GameView.getInstance().getSnake().setNextDirection(Direction.RIGHT);
 						break;
 					case KeyEvent.VK_DOWN:
-						GameView.getInstance().getSnake().setDirection(Direction.DOWN);
+						GameView.getInstance().getSnake().setNextDirection(Direction.DOWN);
 						break;
 					case KeyEvent.VK_LEFT:
-						GameView.getInstance().getSnake().setDirection(Direction.LEFT);
+						GameView.getInstance().getSnake().setNextDirection(Direction.LEFT);
 						break;
 					}
 				}

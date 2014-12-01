@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import model.Difficulty;
 import model.Direction;
 import model.Snake;
 
@@ -26,7 +27,7 @@ public class GameView extends JPanel {
 
 	private GameView() {
 		setVisible(true);
-		snake = new Snake(new Point(3, 3), Direction.DOWN, 3);
+		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.HARD);
 		for (Point bodyPart : snake.getSnakeBody()) {
 			System.out.println("X: " + bodyPart.x + " Y: " + bodyPart.y);
 		}
