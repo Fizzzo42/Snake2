@@ -1,10 +1,12 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.prefs.BackingStoreException;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -26,11 +28,12 @@ public class GameView extends JPanel {
 	}
 
 	private GameView() {
+		//setSize(200, 200);
+		setBackground(Color.RED);
 		setVisible(true);
+
 		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.HARD);
-		for (Point bodyPart : snake.getSnakeBody()) {
-			System.out.println("X: " + bodyPart.x + " Y: " + bodyPart.y);
-		}
+
 		Timer timer = new Timer(30, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -48,9 +51,10 @@ public class GameView extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 
-		Graphics2D g2 = (Graphics2D) g; //Clear
+		Graphics2D g2 = (Graphics2D) g;
 
-		g2.clearRect(0, 0, getWidth(), getHeight());
+		g2.setColor(getBackground());
+		g2.fillRect(0, 0, getWidth(), getHeight()); //Clear
 
 		// g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		//		Font font = new Font("Serif", Font.PLAIN, 96);
@@ -58,6 +62,7 @@ public class GameView extends JPanel {
 		//		g2.drawString("Text", 40, 120);
 
 		//		g2.draw(mySnake);
+		g2.setColor(Color.BLACK);
 		snake.paint(g2);
 	}
 

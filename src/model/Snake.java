@@ -68,4 +68,8 @@ public class Snake {
 		nextDirection = direction;
 	}
 
+	public Direction getWalkingDirection() {
+		return walkingDirection;
+	}
+
 }
