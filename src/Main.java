@@ -13,7 +13,7 @@ public class Main extends JFrame {
 
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Main main = new Main();
+				new Main();
 			}
 		});
 	}
