@@ -83,4 +83,8 @@ public class Snake {
 		this.running = running;
 	}
 
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
 }

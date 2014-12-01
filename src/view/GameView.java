@@ -32,7 +32,7 @@ public class GameView extends JPanel {
 		setBackground(Color.GRAY);
 		setVisible(true);
 
-		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.HARD);
+		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.DEFAULT);
 
 		Timer timer = new Timer(30, new ActionListener() {
 			@Override

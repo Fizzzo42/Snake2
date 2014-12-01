@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
+import model.Difficulty;
 import model.Direction;
 import model.Snake;
 import view.GameView;
@@ -25,6 +26,7 @@ public class Main extends JFrame {
 	final static int OPTIONSSIZE = 100;
 	final static int TEXTVIEWHEIGHT = 30;
 	JLabel labelInstruction;
+	final static Difficulty DEFAULTDIFFICULTY = Difficulty.MEDIUM;
 
 	public static void main(String[] args) {
 
