@@ -29,7 +29,7 @@ public class GameView extends JPanel {
 
 	private GameView() {
 		//setSize(200, 200);
-		setBackground(Color.RED);
+		setBackground(Color.GRAY);
 		setVisible(true);
 
 		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.HARD);

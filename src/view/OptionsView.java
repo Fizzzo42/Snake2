@@ -16,6 +16,6 @@ public class OptionsView extends JPanel {
 	}
 
 	public OptionsView() {
-		setBackground(Color.red);
+		setBackground(Color.LIGHT_GRAY);
 	}
 }

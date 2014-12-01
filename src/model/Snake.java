@@ -14,6 +14,7 @@ public class Snake {
 	private final static int FATNESS = 10;
 	private Difficulty difficulty;
 	private int diffCounter = 0;
+	private boolean running = false;
 
 	/**
 	 * You have to make sure yourself that you don't draw out of your initial area
@@ -49,12 +50,14 @@ public class Snake {
 	}
 
 	public void doStep() {
-		diffCounter++;
-		if (diffCounter >= difficulty.getDifficulty()) {
-			walkingDirection = nextDirection;
-			snakeBody.addFirst(addPoints(snakeBody.getFirst(), walkingDirection.getPoint()));
-			snakeBody.removeLast();
-			diffCounter = 0;
+		if (running) {
+			diffCounter++;
+			if (diffCounter >= difficulty.getDifficulty()) {
+				walkingDirection = nextDirection;
+				snakeBody.addFirst(addPoints(snakeBody.getFirst(), walkingDirection.getPoint()));
+				snakeBody.removeLast();
+				diffCounter = 0;
+			}
 		}
 	}
 
@@ -70,6 +73,14 @@ public class Snake {
 
 	public Direction getWalkingDirection() {
 		return walkingDirection;
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 
 }

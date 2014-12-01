@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 import model.Direction;
+import model.Snake;
 import view.GameView;
 import view.OptionsView;
 
@@ -21,6 +22,9 @@ import javax.swing.JLabel;
 public class Main extends JFrame {
 
 	final static int GAMESIZE = 300;
+	final static int OPTIONSSIZE = 100;
+	final static int TEXTVIEWHEIGHT = 30;
+	JLabel labelInstruction;
 
 	public static void main(String[] args) {
 
@@ -34,13 +38,13 @@ public class Main extends JFrame {
 	public Main() {
 
 		setTitle("Snake 2.0");
-		setSize(GAMESIZE + 400, GAMESIZE + 50);
+		setSize(GAMESIZE + OPTIONSSIZE, TEXTVIEWHEIGHT + GAMESIZE + TEXTVIEWHEIGHT + 20);
 		setMinimumSize(getSize());
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, GAMESIZE, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, GAMESIZE, 0 };
-		gridBagLayout.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { OPTIONSSIZE, GAMESIZE, 0 };
+		gridBagLayout.rowHeights = new int[] { TEXTVIEWHEIGHT, GAMESIZE, TEXTVIEWHEIGHT };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0 };
 		getContentPane().setLayout(gridBagLayout);
 
@@ -60,9 +64,18 @@ public class Main extends JFrame {
 		gbc_options.gridy = 1;
 		getContentPane().add(options, gbc_options);
 
+		labelInstruction = new JLabel("Please press a button to start...");
+		GridBagConstraints gbc_labelInstruction = new GridBagConstraints();
+		gbc_labelInstruction.insets = new Insets(0, 0, 5, 0);
+		gbc_labelInstruction.gridx = 0;
+		gbc_labelInstruction.gridwidth = 2;
+		gbc_labelInstruction.gridy = 0;
+		getContentPane().add(labelInstruction, gbc_labelInstruction);
+
 		JLabel lblMadeByzhan = new JLabel("made by Özhan Kaya");
 		GridBagConstraints gbc_lblMadeByzhan = new GridBagConstraints();
-		gbc_lblMadeByzhan.gridx = 1;
+		gbc_lblMadeByzhan.gridx = 0;
+		gbc_lblMadeByzhan.gridwidth = 2;
 		gbc_lblMadeByzhan.gridy = 2;
 		getContentPane().add(lblMadeByzhan, gbc_lblMadeByzhan);
 
@@ -77,28 +90,34 @@ public class Main extends JFrame {
 			@Override
 			public boolean dispatchKeyEvent(KeyEvent e) {
 				if (e.getID() == KeyEvent.KEY_PRESSED) {
-					switch (e.getKeyCode()) {
-					case KeyEvent.VK_UP:
-						if (GameView.getInstance().getSnake().getWalkingDirection() != Direction.DOWN)
-							GameView.getInstance().getSnake().setNextDirection(Direction.UP);
-						break;
-					case KeyEvent.VK_RIGHT:
-						if (GameView.getInstance().getSnake().getWalkingDirection() != Direction.LEFT)
-							GameView.getInstance().getSnake().setNextDirection(Direction.RIGHT);
-						break;
-					case KeyEvent.VK_DOWN:
-						if (GameView.getInstance().getSnake().getWalkingDirection() != Direction.UP)
-							GameView.getInstance().getSnake().setNextDirection(Direction.DOWN);
-						break;
-					case KeyEvent.VK_LEFT:
-						if (GameView.getInstance().getSnake().getWalkingDirection() != Direction.RIGHT)
-							GameView.getInstance().getSnake().setNextDirection(Direction.LEFT);
-						break;
+					Snake mySnake = GameView.getInstance().getSnake();
+
+					if (mySnake.isRunning()) {
+						switch (e.getKeyCode()) {
+						case KeyEvent.VK_UP:
+							if (mySnake.getWalkingDirection() != Direction.DOWN)
+								mySnake.setNextDirection(Direction.UP);
+							break;
+						case KeyEvent.VK_RIGHT:
+							if (mySnake.getWalkingDirection() != Direction.LEFT)
+								mySnake.setNextDirection(Direction.RIGHT);
+							break;
+						case KeyEvent.VK_DOWN:
+							if (mySnake.getWalkingDirection() != Direction.UP)
+								mySnake.setNextDirection(Direction.DOWN);
+							break;
+						case KeyEvent.VK_LEFT:
+							if (mySnake.getWalkingDirection() != Direction.RIGHT)
+								mySnake.setNextDirection(Direction.LEFT);
+							break;
+						}
+					} else {
+						mySnake.setRunning(true);
+						labelInstruction.setText("");
 					}
 				}
 				return false;
 			}
 		});
 	}
-
 }
