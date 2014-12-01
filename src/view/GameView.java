@@ -3,43 +3,53 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.CyclicBarrier;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import model.Direction;
 import model.Snake;
 
-public class GameView extends JFrame {
+public class GameView extends JPanel {
 
-	Snake mySnake;
-	CyclicBarrier syncPoint;
+	private Snake snake;
+	private static GameView instance = null;
 
-	public GameView() {
-		setSize(700, 300);
-		mySnake = new Snake(new Point(30, 30), Direction.RIGHT, 30);
-		for (Point bodyPart : mySnake.getSnakeBody()) {
+	public static GameView getInstance() {
+		if (instance == null) {
+			instance = new GameView();
+		}
+		return instance;
+	}
+
+	private GameView() {
+		setVisible(true);
+		snake = new Snake(new Point(3, 3), Direction.DOWN, 3);
+		for (Point bodyPart : snake.getSnakeBody()) {
 			System.out.println("X: " + bodyPart.x + " Y: " + bodyPart.y);
 		}
 		Timer timer = new Timer(30, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mySnake.doStep();
+				snake.doStep();
 				repaint();
 			}
 		});
 		timer.start();
+	}
 
+	public Snake getSnake() {
+		return snake;
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
+
+		Graphics2D g2 = (Graphics2D) g; //Clear
+
+		g2.clearRect(0, 0, getWidth(), getHeight());
 
 		// g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		//		Font font = new Font("Serif", Font.PLAIN, 96);
@@ -47,11 +57,7 @@ public class GameView extends JFrame {
 		//		g2.drawString("Text", 40, 120);
 
 		//		g2.draw(mySnake);
-		Polygon square = new Polygon();
-		
-		for (Point bodyPart : mySnake.getSnakeBody())
-			square.addPoint(bodyPart.x, bodyPart.y);
-		g2.draw(square);
+		snake.paint(g2);
 	}
 
 }

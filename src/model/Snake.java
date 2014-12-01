@@ -1,7 +1,7 @@
 package model;
 
+import java.awt.Graphics2D;
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -10,7 +10,7 @@ public class Snake {
 	// Head is always at Position 0
 	private Deque<Point> snakeBody;
 	private Direction walkingDirection;
-	private final static int FATNESS = 30;
+	private final static int FATNESS = 10;
 
 	/**
 	 * You have to make sure yourself that you don't draw out of your initial area
@@ -35,7 +35,7 @@ public class Snake {
 		x = p1.x;
 		y = p1.y;
 		x += p2.x;
-		x += p2.y;
+		y += p2.y;
 		return new Point(x, y);
 	}
 
@@ -46,6 +46,17 @@ public class Snake {
 	public void doStep() {
 		snakeBody.addFirst(addPoints(snakeBody.getFirst(), walkingDirection.getPoint()));
 		snakeBody.removeLast();
+	}
+
+	public void paint(Graphics2D g2) {
+
+		for (Point bodyPart : snakeBody)
+			g2.fillRect(bodyPart.x * FATNESS, bodyPart.y * FATNESS, FATNESS, FATNESS);
+
+	}
+
+	public void setDirection(Direction direction) {
+		walkingDirection = direction;
 	}
 
 }
