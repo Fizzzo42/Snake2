@@ -1,24 +1,18 @@
-import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import model.Difficulty;
 import model.Direction;
 import model.Snake;
 import view.GameView;
 import view.OptionsView;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JPanel;
-
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
 
 public class Main extends JFrame {
 
@@ -26,7 +20,6 @@ public class Main extends JFrame {
 	final static int OPTIONSSIZE = 100;
 	final static int TEXTVIEWHEIGHT = 30;
 	JLabel labelInstruction;
-	final static Difficulty DEFAULTDIFFICULTY = Difficulty.MEDIUM;
 
 	public static void main(String[] args) {
 
