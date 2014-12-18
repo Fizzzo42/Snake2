@@ -33,11 +33,11 @@ public class Main extends JFrame {
 	public Main() {
 
 		setTitle("Snake 2.0");
-		setSize(GAMESIZE + OPTIONSSIZE, TEXTVIEWHEIGHT + GAMESIZE + TEXTVIEWHEIGHT + 20);
+		setSize(GAMESIZE + OPTIONSSIZE + 40, TEXTVIEWHEIGHT + GAMESIZE + TEXTVIEWHEIGHT + 20);
 		setMinimumSize(getSize());
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { OPTIONSSIZE, GAMESIZE, 0 };
+		gridBagLayout.columnWidths = new int[] { 100, 300, 0 };
 		gridBagLayout.rowHeights = new int[] { TEXTVIEWHEIGHT, GAMESIZE, TEXTVIEWHEIGHT };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0 };
@@ -45,7 +45,7 @@ public class Main extends JFrame {
 
 		JPanel gameview = GameView.getInstance();
 		GridBagConstraints gbc_gameview = new GridBagConstraints();
-		gbc_gameview.insets = new Insets(0, 0, 5, 5);
+		gbc_gameview.insets = new Insets(0, 0, 0, 0);
 		gbc_gameview.fill = GridBagConstraints.BOTH;
 		gbc_gameview.gridx = 1;
 		gbc_gameview.gridy = 1;
@@ -59,7 +59,7 @@ public class Main extends JFrame {
 		gbc_options.gridy = 1;
 		getContentPane().add(options, gbc_options);
 
-		labelInstruction = new JLabel("Please press a button to start...");
+		labelInstruction = new JLabel("Please press \"P\" to start...");
 		GridBagConstraints gbc_labelInstruction = new GridBagConstraints();
 		gbc_labelInstruction.insets = new Insets(0, 0, 5, 0);
 		gbc_labelInstruction.gridx = 0;
@@ -106,7 +106,7 @@ public class Main extends JFrame {
 								mySnake.setNextDirection(Direction.LEFT);
 							break;
 						}
-					} else {
+					} else if (e.getKeyCode() == KeyEvent.VK_P) {
 						mySnake.setRunning(true);
 						labelInstruction.setText("");
 					}
