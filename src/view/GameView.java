@@ -6,7 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.prefs.BackingStoreException;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -14,8 +15,9 @@ import javax.swing.Timer;
 import model.Difficulty;
 import model.Direction;
 import model.Snake;
+import errors.UnsupportedViewSizeError;
 
-public class GameView extends JPanel {
+public class GameView extends JPanel implements ComponentListener {
 
 	private Snake snake;
 	private static GameView instance = null;
@@ -28,11 +30,11 @@ public class GameView extends JPanel {
 	}
 
 	private GameView() {
-		// setSize(200, 200);
+		this.addComponentListener(this);
+		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.DEFAULT);
+
 		setBackground(Color.GRAY);
 		setVisible(true);
-
-		snake = new Snake(new Point(3, 3), Direction.DOWN, 3, Difficulty.DEFAULT);
 
 		Timer timer = new Timer(30, new ActionListener() {
 			@Override
@@ -65,6 +67,25 @@ public class GameView extends JPanel {
 		// g2.draw(mySnake);
 		g2.setColor(Color.BLACK);
 		snake.paint(g2);
+	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		if (getWidth() % Snake.FATNESS != 0 || getHeight() % Snake.FATNESS != 0) {
+			throw new UnsupportedViewSizeError("Snake won't fit perfectly into GameView");
+		}
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
 	}
 
 }

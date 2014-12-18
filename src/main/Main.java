@@ -1,3 +1,4 @@
+package main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -37,7 +38,7 @@ public class Main extends JFrame {
 		setMinimumSize(getSize());
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 100, 300, 0 };
+		gridBagLayout.columnWidths = new int[] { OPTIONSSIZE, GAMESIZE, 0 };
 		gridBagLayout.rowHeights = new int[] { TEXTVIEWHEIGHT, GAMESIZE, TEXTVIEWHEIGHT };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0 };

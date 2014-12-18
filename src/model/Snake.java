@@ -11,18 +11,20 @@ public class Snake {
 	private Deque<Point> snakeBody;
 	private Direction walkingDirection;
 	private Direction nextDirection;
-	private final static int FATNESS = 10;
+	public final static int FATNESS = 10;
 	private Difficulty difficulty;
 	private int diffCounter = 0;
 	private boolean running = false;
 
 	/**
-	 * You have to make sure yourself that you don't draw out of your initial area
+	 * You have to make sure yourself that you don't draw out of your initial
+	 * area
 	 * 
 	 * @param startingPoint
 	 * 
 	 * @param direction
-	 *            Direction in which the Snake should walk to (Tailparts will be added in the opposite direction)
+	 *            Direction in which the Snake should walk to (Tailparts will be
+	 *            added in the opposite direction)
 	 * @param lenght
 	 *            1 = Only the head
 	 */
